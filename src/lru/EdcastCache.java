@@ -5,8 +5,9 @@ package lru;
  */
 public interface EdcastCache {
 
-    public void put(int id, Object o);
-    public Object get(int id);
-    public void size(int size);
+    public void put(Object id, Object o);
+    public Object get(Object id);
+    public void setSize(int size);
+    public int getSize();
 
 }

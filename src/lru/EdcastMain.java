@@ -9,22 +9,24 @@ public class EdcastMain {
     public static void main(String[] args) {
 
         CacheManager cm = CacheManager.getInstance();
-        cm.size(5);
+        cm.setSize(5);
 
-        cm.put(1, "a");
+        cm.put(5.6, "a");
         cm.printCache();
 
-        cm.put(2, "b");
+        cm.put("string", "b");
         cm.printCache();
 
-        Object one = cm.get(1);
+        Object one = cm.get("string");
         System.out.println(String.valueOf(one));
 
-        Object two = CacheManager.getInstance().get(3);
+        Object two = cm.get(3);
         System.out.println(String.valueOf(two));
 
-        CacheManager.getInstance().put(3, "c");
-        CacheManager.getInstance().printCache();
+        cm.put(true, "c");
+        cm.printCache();
+
+        System.out.println(cm.getSize());
 
     }
 }

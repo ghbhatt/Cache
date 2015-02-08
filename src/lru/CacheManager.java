@@ -10,7 +10,7 @@ public class CacheManager implements EdcastCache {
     private static CacheManager cacheManager;
 
     /* The HashMap to hold the Cached objects */
-    private HashMap<Integer, Node> cacheMap = new HashMap<Integer, Node>();
+    private HashMap<Object, Node> cacheMap = new HashMap<Object, Node>();
 
     /* Node head to indicate the head of the list, the most recently used object */
     private Node head;
@@ -38,7 +38,7 @@ public class CacheManager implements EdcastCache {
 
 
     @Override
-    public void put(int id, Object o) {
+    public void put(Object id, Object o) {
         // item to be inserted already exists, so update the item with new value and make it the head
         if (cacheMap.containsKey(id)) {
             Node existNode = cacheMap.get(id);
@@ -68,7 +68,7 @@ public class CacheManager implements EdcastCache {
     }
 
     @Override
-    public Object get(int id) {
+    public Object get(Object id) {
         //return the item if it exists in the CacheMap
         if (cacheMap.containsKey(id)) {
             Node latest = cacheMap.get(id);
@@ -82,8 +82,13 @@ public class CacheManager implements EdcastCache {
     }
 
     @Override
-    public void size(int size ) {
+    public void setSize(int size ) {
         this.size = size;
+    }
+
+    @Override
+    public int getSize() {
+        return cacheMap.size();
     }
 
     /**
@@ -128,6 +133,7 @@ public class CacheManager implements EdcastCache {
     }
 
     public void printCache() {
+        System.out.println("-------");
         Node node = head;
         while (node != null) {
             System.out.println(node.key + " - " + node.value);
@@ -143,11 +149,11 @@ public class CacheManager implements EdcastCache {
      * */
     class Node {
         public Object value;
-        public int key;
+        public Object key;
         public Node previous;
         public Node next;
 
-        public Node(int key, Object value) {
+        public Node(Object key, Object value) {
             this.key = key;
             this.value = value;
         }
